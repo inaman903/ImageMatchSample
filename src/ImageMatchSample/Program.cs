@@ -28,6 +28,10 @@ using var imgCircleRed = Image.Load<Rgba32>(@"circle_red.png");
 using var matCircleMargin = new Mat(@"circle_margin.png");
 using var imgCircleMargin = Image.Load<Rgba32>(@"circle_margin.png");
 
+// 矩形
+using var matRect = new Mat(@"rect.png");
+using var imgRect = Image.Load<Rgba32>(@"rect.png");
+
 
 // AKAZE
 Console.WriteLine("AKAZE");
@@ -37,6 +41,7 @@ Console.WriteLine("Circle <-> Circle2x:" + ImageMatcher.Akaze(matCircle, matCirc
 Console.WriteLine("Circle <-> Circle0.5x:" + ImageMatcher.Akaze(matCircle, matCircle05x));
 Console.WriteLine("Circle <-> CircleRed:" + ImageMatcher.Akaze(matCircle, matCircleRed));
 Console.WriteLine("Circle <-> CircleMargin:" + ImageMatcher.Akaze(matCircle, matCircleMargin));
+Console.WriteLine("Circle <-> Rect:" + ImageMatcher.Akaze(matCircle, matRect));
 
 // Hist
 Console.WriteLine("Hist");
@@ -46,6 +51,7 @@ Console.WriteLine("Circle <-> Circle2x:" + ImageMatcher.Hist(matCircle, matCircl
 Console.WriteLine("Circle <-> Circle0.5x:" + ImageMatcher.Hist(matCircle, matCircle05x));
 Console.WriteLine("Circle <-> CircleRed:" + ImageMatcher.Hist(matCircle, matCircleRed));
 Console.WriteLine("Circle <-> CircleMargin:" + ImageMatcher.Hist(matCircle, matCircleMargin));
+Console.WriteLine("Circle <-> Rect:" + ImageMatcher.Hist(matCircle, matRect));
 
 // PHash
 Console.WriteLine("PHash");
@@ -55,6 +61,7 @@ Console.WriteLine("Circle <-> Circle2x:" + ImageMatcher.Hash(new PerceptualHash(
 Console.WriteLine("Circle <-> Circle0.5x:" + ImageMatcher.Hash(new PerceptualHash(), imgCircle, imgCircle05x));
 Console.WriteLine("Circle <-> CircleRed:" + ImageMatcher.Hash(new PerceptualHash(), imgCircle, imgCircleRed));
 Console.WriteLine("Circle <-> CircleMargin:" + ImageMatcher.Hash(new PerceptualHash(), imgCircle, imgCircleMargin));
+Console.WriteLine("Circle <-> Rect:" + ImageMatcher.Hash(new PerceptualHash(), imgCircle, imgRect));
 
 // AHash
 Console.WriteLine("AHash");
@@ -64,6 +71,7 @@ Console.WriteLine("Circle <-> Circle2x:" + ImageMatcher.Hash(new AverageHash(), 
 Console.WriteLine("Circle <-> Circle0.5x:" + ImageMatcher.Hash(new AverageHash(), imgCircle, imgCircle05x));
 Console.WriteLine("Circle <-> CircleRed:" + ImageMatcher.Hash(new AverageHash(), imgCircle, imgCircleRed));
 Console.WriteLine("Circle <-> CircleMargin:" + ImageMatcher.Hash(new AverageHash(), imgCircle, imgCircleMargin));
+Console.WriteLine("Circle <-> Rect:" + ImageMatcher.Hash(new AverageHash(), imgCircle, imgRect));
 
 // DHash
 Console.WriteLine("DHash");
@@ -73,3 +81,4 @@ Console.WriteLine("Circle <-> Circle2x:" + ImageMatcher.Hash(new DifferenceHash(
 Console.WriteLine("Circle <-> Circle0.5x:" + ImageMatcher.Hash(new DifferenceHash(), imgCircle, imgCircle05x));
 Console.WriteLine("Circle <-> CircleRed:" + ImageMatcher.Hash(new DifferenceHash(), imgCircle, imgCircleRed));
 Console.WriteLine("Circle <-> CircleMargin:" + ImageMatcher.Hash(new DifferenceHash(), imgCircle, imgCircleMargin));
+Console.WriteLine("Circle <-> Rect:" + ImageMatcher.Hash(new DifferenceHash(), imgCircle, imgRect));

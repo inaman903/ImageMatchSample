@@ -39,15 +39,27 @@ namespace ImageMatchSample
             using var descriptors1 = new Mat();
             using var descriptors2 = new Mat();
 
+            // サイズが小さいと特徴点が取れない場合がある
+            using var m1 = new Mat();
+            Cv2.Resize(mat1, m1, new OpenCvSharp.Size(600, 600));
+            using var m2 = new Mat();
+            Cv2.Resize(mat2, m2, new OpenCvSharp.Size(600, 600));
+
             var akaze = AKAZE.Create();
-            akaze.DetectAndCompute(mat1, null, out KeyPoint[] keyPoints1, descriptors1);
-            akaze.DetectAndCompute(mat2, null, out KeyPoint[] keyPoints2, descriptors2);
+            akaze.DetectAndCompute(m1, null, out KeyPoint[] keyPoints1, descriptors1);
+            akaze.DetectAndCompute(m2, null, out KeyPoint[] keyPoints2, descriptors2);
 
-            var matcher = new BFMatcher(NormTypes.Hamming, false);
-            var matches = matcher.Match(descriptors1, descriptors2);
+            if (!descriptors1.Empty() && !descriptors2.Empty())
+            {
+                // crossCheckをtrueにする精度が上がる気がするが
+                // 特徴点が見つかっていないと例外
+                var matcher = new BFMatcher(NormTypes.Hamming, true);
+                var matches = matcher.Match(descriptors1, descriptors2);
 
-            var sum = matches.Sum(x => x.Distance);
-            return sum / matches.Length;
+                var sum = matches.Sum(x => x.Distance);
+                return sum / matches.Length;
+            }
+            return double.NaN;
         }
     }
 }
